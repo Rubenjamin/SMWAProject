@@ -1,0 +1,91 @@
+---
+title: "The effect of sponsoring an esports event on Twitter sentiment"
+author: Ruben Benjamin Stolk
+date: "Social Media and Web Analytics, 2021"
+output: beamer_presentation
+header-includes:
+- \usepackage{booktabs}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rlist)
+library(modelsummary)
+```
+
+## Motivation
+
+**Esports**
+
+* What is?
+* Growth 
+* Sponsorship problems
+* Research mainly focused on traditional sponsoring
+
+**Variables**
+
+* Sponsoring vs. not sponsoring 
+* Sentiment (Word of mouth)
+* Product-event fit (Cui et all. 2019)
+
+* Partly opposed by Huettermann et all. (2020)
+
+**To what extend does sponsoring an esports event vs not sponsoring at all affect the sponsoring brand’s Twitter sentiment and to what extend does the sponsoring brand’s event-product fit influence this relation?**
+
+## Data
+**Difference in Difference set-up problems** 
+
+* No control group
+* Difference over time
+
+**Twitter data collected during MSI Esports event**
+
+* 5 sponsoring brands measured pre and after start of the event
+* Deleted 2 pre and after data sets
+* Removed retweets due to retweet giveaway
+* Language barrier
+* Removed text without sentiment (http://)
+* Alienware (fit), Secret lab (fit), State farm (no fit)
+
+
+## Methodology
+
+**VADER lexicon**
+
+* Open source sentiment analysis tool focused on social media
+* Higher accuracy than human raters (Hutto & Gilbert 2014). 
+* Standardized threshold followed
+* Positive if:    VADER score >=  0.05"
+* Neutral if:     VADER score > -0.05 and VADER score < 0.05 ,
+* Negative if:    VADER score <= -0.05."
+
+$$ Negative positive ratio(t) =\frac{SUM_t Positive tweets}{SUM_t Negative tweets} $$
+
+$$xbar,of,sentiment(t) = \frac{SUM_t compound tweets}{N_t} $$
+
+## Results
+
+
+```{r, echo = FALSE, results='asis'}
+knitr::include_graphics('../output/PRODUCTFITMODEL2.pdf')
+```
+
+
+## Conclusion
+
+**No hard causal claims**
+
+* Indication that effect of esports sponsoring on Twitter sentiment is short lived
+* Event-product fit matters as in traditional sports (Cui et all. 2019)
+
+**Implications**
+
+* Brand managers with no product fit should focus on other industries
+* Brand managers with product fit should tie in other objectives
+* Event organisers should explore other monetization methods
+
+**Future directions of research**
+
+* Redo research with proper DiD set-up
+* Find a measure to quantify purchase intention
