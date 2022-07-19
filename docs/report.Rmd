@@ -1,0 +1,158 @@
+---
+title: "The effect of sponsoring an Esports event on Twitter sentiment"
+author: "Ruben Benjamin Stolk"
+abstract: This research is about measuring the effect of sponsoring a esports event on Twitter sentiment and how product event-fit influence this relation. Five brands Twitter sentiment have measured during an esport event and the following effects have been found. The effects of sponsoring are short lived and not till the end of the eventand event product fit does have an influence as an increase in sentiment is only observed when there is product fit.
+output: pdf_document
+bibliography: references.bib
+header-includes: 
+- \usepackage{booktabs}
+
+---
+
+```{r, echo = FALSE}
+library(rlist)
+library(modelsummary)
+```
+
+# Introduction 
+  The rapid rise of Esports, competitive gaming went from dusty basement LAN-parties and smokey pc-cafes to a global online viewing events with over 464 million viewers (Statista, 2021) and a market valued at $1.48 billion (Grand view research, 2020) in a timespan of twenty years. The most popular esports is Riot's League of Legends, a 5 vs. 5 game with over 115 million monthly players (Borisov, 2021). Which has no problem generating monetizing their online game but find it difficult to generate revenue out of their esports events and esports ecosystem, a common occurrence in the industry and have caused even minor region leagues to be shut downed (Vejvad, 2020). All esports events are free to view online leaving only one window of opportunity to generate income from, event sponsoring. 
+
+  The effects of sponsoring on sales is hard to quantify in terms of sales but the effect of sponsoring can be measured via the sponsoring brand's image and recall (Chebli & Gharbi., 2013). A strong influencer on this is word of mouth (WoM) advertising. Which can be divided in three categories: Awareness (volume increase), Buzz (volume increase through expression of anticipation) and Social learning (sentiment). All three of them imminently have become bigger since the rise of Twitter. Where every user, generates content and can shout whatever they want to a big audience, including product and event related messages for the reasons such as: social bonding, persuading/informing others and emotion regulation (Berger 2014). 
+
+  Event sponsors hope that the positive sentiment of social media messages such as tweets and positive attributes of the event transfer to their brand so that the reader creates an additional memory trace in the readers associative network, which eventually leads to beneficial brand attitudes and higher purchase intension (Till, Baack, Waterman 2011). 
+
+  As sponsors want to use the esports events as a medium to transfer positive sentiment and attributes towards their brand, event-product fit has been identified as a moderator on this relationship. Existing work have pointed out that a low fit reduces the likelihood and the magnitude of transferring the positive sentiment and attributes of the event on the sponsoring’s brand and eventually purchase intention (Chebli & Gharbi, (2013), Erdem & Swait (1998), Cui, Lee, & Jin (2019)). But this may not always be the case in esports sponsoring, as in recent study of Huettermann et all. (2020) argued that if the brand attitudes does not transfer the esports viewer might just purchase the sponsors’ product just because the brand is supporting esports in general. 
+  
+  This paper quantifies the effect of sponsoring an esports event through the means of WoM sentiment using the VADER lexicon (social learning) (Hutto & Gilbert 2015) on Twitter scraped data by answering the following research question:
+  
+**To what extend does sponsoring an esports event vs not sponsoring at all affect the sponsoring brand’s Twitter sentiment and to what extend does the sponsoring brand’s event-product fit influence this relation?**
+
+# Related Literature
+
+  This research contribute to the existing literature that is oriented around the effect of (esports) sponsoring and WoM. Previous sponsorship and WoM studies have interfaces with this current study, but have mostly focused on a traditional (sport) sponsoring or WoM effect on demand for a certain product. Such as the study of Cui, Lee and Jin (2019) where the effect of sponsorship is on purchase intention through the halo effect is researched. This research used a 2x2x2 factorial between-subject design and found when there is a good company fit (high congruence) on the sponsoring event has a significant positive effect on the brand corporate brand attitude vs. when it does not (low congruence). This also counts for the purchase intention of the consumer on the sponsoring brand/product. One might assume that this could lead to positive WoM/Twitter sentiment, but in the research of Huettermann et al. (2020) is argued that mere esports enthusiasts that have a positive image on esports as a whole are more likely to purchase a sponsoring brand’s product and argues that brand attitude does not transfer to the sponsoring brand. This could lead to a change of twitter sentiment could not be prominent. 
+  
+  Research regarding WoM on product demand and sentiment is quiet extensive but in a esports sponsoring setting has not been done before. So has Lu et all. (2013) researched the effect of online reviews on restaurant sales and found there is a positive effect and that there is even a positive interaction effect when combined with promotional marketing (couponing and SEA) in China. A more film oriented research by Gelper et all. (2018) about WoM spikes around event-driven and firm-created communications reveal that sudden burst in WoM are more often positive in sentiment and are significantly linked to the predictability in sales. 
+This research took inspiration of the earlier called researches, firstly by researching the effect sponsoring on WoM and secondly the difference between product-event fit by doing WoM sensitivity analysis in a new esports context.
+
+# Industry background
+
+  To fully understand to scope of this research, slight understanding of the development of esport in the last 10 years is needed. Esports was in his infancy in around 2010, this changed in 2013 when Riot games with a market penetration strategy created and started to 12 regional leagues worldwide at a major operating loss. This regional leagues are broadcasted live on Twitch, YouTube and other streaming platforms and are free to watch.
+  
+  In 2016, franchising started in the regional leagues. A lot of VC capital entered the industry and new and older teams started to venture out to upcoming competitor games and started contracting other popular (Twitch) influencers/streamers. The top teams do not have any problems attracting capital and sponsorships but on the other side were in traditional sports regional leagues generate income via broadcasting-rights, esports leagues does not and have to compete for sponsorships with the teams they basically have incubated, were some are now valued over $300M (Ozanian & Settimi, 2018). 
+
+
+# Data
+
+  In this research Riot Games’ League of Legends Mid-Season Invitational (MSI) was chosen as event to measure to effect of WoM on sponsoring brand’s Twitter sentiment on. MSI is a yearly hosted worldwide event, where the best regional teams collide to be determined the best League of Legends team in the world. This worldwide event was chosen over regional leagues due the lack of potential volume of tweets and languages barriers regarding regional sponsors which caused skewed sentiment results.
+  
+  MSI has 5 sponsors: Secret lab (‘Gaming’ desk chairs), Alienware (‘Gaming’ PC hardware), RedBull (energy drink), State Farm (insurances) and Mercedes (Cars). Based on judgement call the sponsors have been grouped on Fit vs. No fit. 
+
+
+$$
+Fit: Secret Lab, Alienware, RedBull. 
+$$
+
+$$
+No fit: State farm, Mercedes. 
+$$
+
+
+## Data collection
+
+  To estimate the intensity of WoM, search queries regarding the sponsoring brands have been done. Twitter has been chosen as platform to scrap data from as it is the biggest microblogging platform in the “west”. The data was collected seven days prior to start of the event and seven days after the start of the event. The search queries were set out to collect 60.000 tweets per brand. Each query was focused on one sponsoring brand on a worldwide scale. Each tweet needed to have the sponsoring brand name in the Tweet. But was not limited to retweets, direct tweets or hashtags.
+
+
+## Data processing
+
+  *The collected data was grouped in 2 groups, “pre-start and after-start”, this was done with the earlier understanding that this could prove a causal relationship between event sponsorship on sentiment and the effect of product fit. But after learning more about Difference in Difference set-ups and parallel trends assumption, The pre-start measurement was designed to be the control group but actually is not, therefore causal claims cannot be made in this research. *
+
+  Three important details came to light while processing the data. Firstly, the RedBull and Mercedes data were dominated by F1 racing related tweets as both brands are F1 racing team owners. Therefor both data sets were deleted. Secondly, Alienware was doing a retweet giveaway promotion, this promotion is an unusual outlier and therefor is decided to remove all retweet for all datasets. This decision hurts the validity of this research a bit as this action also means tweets were delete where people shared/agreed with someone else’s opinion by retweeting.  Thirdly, to avoid misinterpretation, only tweets in English have been maintained in the data set. Furthermore text that has no meaning/sentiment attached to it was deleted as well (I.E “http:\\). Afterwards, VADER sentiment lexicon was applied on the datasets and the pre and after start of MSI were tied together as 3 brand related sets and compared on positive/negative ratio and average sentiment per tweet.
+
+
+
+# Methodology 
+
+  The tool used in this research is to measure WoM sentiment is VADER lexicon, which is an open-source sentiment analysis tool focused on social media, which has a higher accuracy in rating the sentiment of social media text vs. human raters (Hutto & Gilbert 2014). Vader rates the tweets on a  -1 to 1 scale. Hutto & Gilbert (2014) also created a standardized threshold for classifying sentence as: negative, neutral or positive. Which was held in this research, which is as follows
+        Positive if:    VADER score >=  0.05",
+        Neutral if:     VADER score > -0.05 and VADER score < 0.05 ,
+        Negative if:    VADER score <= -0.05."
+
+
+
+This so called compound scores where than grouped by day to create a positive negative ratio as follows:
+
+$$ Negative positive ratio(t) =\frac{SUM_t Positive tweets}{SUM_t Negative tweets} $$
+and AVG_sentiment per tweet as follows:
+
+$$ xbar,of,sentiment(t) = \frac{SUM_t compound tweets}{N_t} $$
+
+These measures were used to calculate the sentiment regarding the sponsoring brands.
+
+# Results
+
+```{r, echo = FALSE, results='asis'}
+knitr::include_graphics('../output/PRODUCTFITMODEL2.pdf')
+```
+  All graphs represented in table 1 represent the effect of sponsoring an esports event on twitter sentiment. The dotted line represents the start of the event. A focal increase of around 25% in the positive negative ratio in twitter sentiment can be seen when the event starts but decreases the day after and does not increase anymore. A similar pattern can be seen on the average sentiment per tweet, the increase starts when the event begins but reduces shortly after. Even this measurement is correlated to the positive negative ratio but an higher positive-negative ratio does not always have to mean a higher average sentiment per tweet. Overall these are indicators that there is only a short lived effect of sponsoring an esports event on sponsoring brand’s Twitter sentiment.
+
+  Comparing product-event fit (Table 1B & 1C) vs. No fit (Table 1A), the brands with product fit do show the increase in positive negative ratio and average sentiment per tweet, but State Farm (no fit) does not. This is an indication that within esports sponsoring the effect of sponsoring an esports event on twitter sentiment is increased when there is product-event fit but is decreased when there is no fit. 
+
+
+# Conclusion
+
+  This research focused on the effect of sponsoring an esports event on twitter sentiment and the influence of product-event fit on this relationship. Previously the event stakeholders had a difficult time quantifying the value of sponsoring (Chebli & Gharbi., 2013). By using VADER lexicon this research quantified WoM (sentiment) before and during the event of the sponsoring brands through the use of Twitter API scrapped data.
+
+  The effect of sponsoring an esports event on Twitter sentiment overall is small. An effect is only observed at the start of the event (25%). During the event this increase of WoM sentiment is not maintained and return back to averages levels. A similar pattern is seen in the average sentiment per tweet. The product-event fit matters on the effect of esports sponsoring on Twitter sentiment. The two brands with product-event fit both showed the increase of sentiment at the start of the esports event.  The sponsoring brand with no fit does not show any pattern hence sponsoring an esports does not have an effect of twitter sentiment for brand with no product-event fit.
+
+  The drawn up conclusion of this research has to be taken lighthearted as the conditions for a proper Difference in Difference set up was not met, due to the lack of a control group in a time series research. Furthermore the free Twitter API has limitations such as only offering 1% of the total sample as data and limiting historical search option and geographic tagging. This could have caused some biases, therefor this research should be seen as a early indication of the effect and can be used as a basis for further research into the effect of esports sponsoring on Twitter sentiment.
+
+
+# Managerial relevance 
+
+  Esports event stakeholders have an hard time quantifying the effect of esports sponsoring. The effect is short and not continuous over the event. Brand managers for brands with low-product event fit that want to create a WoM marketing strategy are better of spending their promotional spending on something else than an esports event,  as the effect of sponsoring on Twitter sentiment is zeroed out by to lack of product-event fit. In the contrary brand managers with a product-event fit can find esports sponsoring lucrative but coping with a short-lived effect is essential. An option is to tie in other marketing objectives on a esports sponsoring strategy as well to maximize value out of the Dollar spent. This research results also effect event organizers which are often held at a loss and hope to break even through sponsoring might want to explore other ways of monetizing their broadcast, as the benefit for sponsors are limited.
+  
+# Future directions of research
+
+  This research has his limitation in research set-up (DiD) but have shown early indication in esports sponsoring effect on Twitter sentiment. This research can be run again with a proper DiD set-up to solidify the research findings and on multiple esport event. A future researcher in this subject could take inspiration from the research of Cui, Lee & Jin (2019) as well, where product-event fit and (traditional) event sponsoring is quantified by measuring purchase intention. By tying in purchase intention as a variable, one has a variable that is more appealing for brand managers than mere Twitter sentiment and event organizers to justify the investment in esports sponsoring
+
+# Word Count {-} knit errors surrounding the reference list forced me to write all references down here, which caused me to be over the max word count.
+
+Number of Words: `r wordcountaddin::word_count("report.Rmd")`
+
+# References
+
+Berger, J. (2014). Word of mouth and interpersonal communication: A review and directions for future research. *Journal of consumer psychology*, 24(4), 586-607. DOI:10.1016/j.jcps.2014.05.002
+
+Chebli, L. & Gharbi,  a. (2013). The impact of the effectiveness of sponsorship on image and
+memorizing: Role of congruence and relational proximity. *Procedia - Social and Behavioral Sciences*, 109, 913-924.DOI:10.1016/j.sbspro.2013.12.564
+
+Choi, S. M., & Rifon, N. J. (2012). It is a match: The impact of congruence between celebrity image and consumer ideal selfonendorsement effectiveness. *Psychology & Marketing*, 29(9), 639-650. DOI: 10.1002/mar.20550
+
+Cui, G.Q., Lee, J.Y. & Jin, C.H.(2019) The role of sports sponsorship in negative new stories about a brand: Approach the halo effect *Cogent Business & Management*. DOI:10.1080/23311975.2019.1699284.
+
+Erdem, T., & Swait, J. (1998). Brand Equity as a Signaling Phenomenom. *Journal of Consumer Pshychology*, (7)/2, 131-157. https://doi.org/10.1207/s15327663jcp0702_02
+
+Hutto, C.J., Gilbert, E. (2014) VADER: A parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. *Proceedings of the International AAAI Conference on Web and Social Media*, 8(1). Retrieved from: https://ojs.aaai.org/index.php/ICWSM/article/view/14550
+
+Lu. X.H., Ba. S.L., Huang, L.H. & Feng. Y. (2013) Promotional Marketing or Word-of-Mouth? Evidence from Online Restaurant Reviews. *Information Systems Research* 24 (3). 596-612. DOI:
+
+Ozanian, M., Settimi, C. (2018) *The world's Most Valuable Esports Companies*. Forbes. Retrieved from: https://www.forbes.com/sites/mikeozanian/2018/10/23/the-worlds-most-valuable-esports-companies-1/?sh=2e2909526a6e
+
+Raharja, S. J., (2020). Impacht of Electronic Word -of- Mouth on Brand Awareness in the Video Game Sector: A study on Digital Happiness. *International Journal of Trade and Global Markets*. 13(1):1. DOI:10.1504/IJTGM.2020.10021566
+
+Schouten, A. P., Janssen, L., & Verspaget, M. (2019). Celebrity vs. Influencer endorsements in advertising: The role of identification, credibility, and Product-Endorser fit. *International journal of advertising*, 1-24. DOI:10.1080/02650487.2019.1634898
+
+Statista. (2021). *eSports audience size worldwide from 2019 to 2024, by type of viewers*. Statista. Retrieved from: https://www.statista.com/statistics/490480/global-esports-audience-size-viewer-type/
+
+Till, D., Baack, D., & Waterman, B. (2011).Strategic brand association maps: developing brand insight. *Journal of Product & Brand Management* 20/2, 92-100. DOI:10.1108/10610421111121080
+
+Vejvad, C, (2020). *Riot Games shuts down the Oceanic Pro League*. Win. Retrieved from:
+https://win.gg/news/5766/riot-game-shuts-down-the-oceanic-pro-league
+
+Borisov, A. (2021). *Most popular esport games in 2020*. Esport Charts. Retrieved from: https://escharts.com/blog/most-popular-esports-gam
+
+
+
+
+
+
